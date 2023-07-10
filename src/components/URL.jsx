@@ -8,43 +8,39 @@ export default function URL() {
         longURL: "",
         tiny_url: ""
     })
-    console.log(url)
 
     const [allURLs, setAllURLs] = React.useState([])
     
-    function fetchTinyURL(event) {
+    async function fetchTinyURL(event) {
         event.preventDefault();
-      
-        console.log ("fetching")
+        try {
+            let body = {
+            url: url.longURL
+            };
+        
+            const response = await fetch('https://api.tinyurl.com/create', {
+                method: 'POST',
+                headers: {
+                    'accept': 'application/json',
+                    'authorization': `Bearer ${API_TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+                })
+            
+            const data = await response.json()
 
-        let body = {
-          url: url.longURL
-        };
-      
-        fetch('https://api.tinyurl.com/create', {
-          method: 'POST',
-          headers: {
-            'accept': 'application/json',
-            'authorization': `Bearer ${API_TOKEN}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(body)
-        })
-          .then(response => response.json())
-          .then(data => {
-            // save newURL so we can call setURL with UPDATED version
             const newURL = {
-              ...url,
-              tiny_url: data.data.tiny_url
+                ...url,
+                tiny_url: data.data.tiny_url
             }
-            console.log("made it here...")
+
             setURL(newURL)
             setAllURLs(prevURLs => [...prevURLs, newURL])
-          })
-          .catch(error => {
+        } catch(error) {
             console.error(error);
             // Handle any errors here
-          })
+          }
     }
       
 
