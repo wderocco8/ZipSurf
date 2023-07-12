@@ -1,0 +1,85 @@
+* {
+    background-color: #F5F5F5;
+    font-family: Karla;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-size: 64px;
+    letter-spacing: -2px;
+}
+
+.blue-text {
+    color: #2A00FF;
+}
+
+.description {
+    width: 300px;
+    text-align: center;
+    font-size: 24px;
+    font-style: italic;
+    margin-bottom: 60px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: left; 
+    width: 510px;
+    height: 50px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.35);
+    margin-bottom: 50px;
+}
+
+.form .form--input {
+    border: none;
+    background-color: #FFFFFF;
+    padding-left: 25px;
+    width: 300px;
+    outline: none
+}
+
+.form .form--button {
+    margin-left: auto;
+    margin-right: 5px;
+    width: 100px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    /* outline: none; */
+    background: linear-gradient(180deg, rgba(0, 25, 255, 0.72) 0%, rgba(0, 25, 255, 0.33) 100%);
+    box-shadow:0 2px 0 #7A86FF;
+    color: #FFFFFF;
+}
+
+/* Prevent autofill from altering searchbox background color */
+input:-webkit-autofill {
+    box-shadow: 0 0 0 1000px white inset !important;
+}
+
+.form .form--button:hover {
+    cursor:grab;
+}
+
+.form .form--button:active {
+    box-shadow: none;
+    transform: translateY(2px);
+}
+
+
+

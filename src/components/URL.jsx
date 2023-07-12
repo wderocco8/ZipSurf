@@ -71,7 +71,7 @@ export default function URL() {
             <div className="form">
                 <input 
                     type="text"
-                    placeholder="Enter a long URL here"
+                    placeholder="www.reallyLongURL/NeedsShortening.com"
                     className="form--input"
                     name="longURL"
                     value={url.longURL}
@@ -83,7 +83,7 @@ export default function URL() {
                     onClick={fetchTinyURL}
 
                 >
-                    Shorten URL   
+                    Shorten  
                 </button>
             </div>
             <div>
