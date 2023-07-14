@@ -5,9 +5,9 @@ import URL from './components/URL'
 export default function App() {
 
     return (
-        <div>
+        <main>
             <Header />
             <URL />
-        </div>
+        </main>
     )
 }

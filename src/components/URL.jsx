@@ -6,6 +6,7 @@ export default function URL() {
 
     const [url, setURL] = React.useState({
         longURL: "",
+        alias: "",
         tiny_url: ""
     })
 
@@ -14,8 +15,10 @@ export default function URL() {
     async function fetchTinyURL(event) {
         event.preventDefault();
         try {
+            // information for API call
             let body = {
-            url: url.longURL
+                url: url.longURL,
+                alias: url.alias
             };
         
             const response = await fetch('https://api.tinyurl.com/create', {
@@ -29,9 +32,10 @@ export default function URL() {
                 })
             
             const data = await response.json()
-
+            console.log(data)
             const newURL = {
                 ...url,
+                alias: data.data.alias,
                 tiny_url: data.data.tiny_url
             }
 
@@ -67,28 +71,42 @@ export default function URL() {
     ))
 
     return (
-        <main>
+        <div>
             <div className="form">
-                <input 
-                    type="text"
-                    placeholder="www.reallyLongURL/NeedsShortening.com"
-                    className="form--input"
-                    name="longURL"
-                    value={url.longURL}
-                    onChange={handleChange}
-                    onKeyDown={handleKeyDown}
-                />
-                <button
-                    className='form--button'
-                    onClick={fetchTinyURL}
+                <div className="form--alias">
+                    <input 
+                        type="text"
+                        placeholder="enter an alias (optional)"
+                        className="form--inputAlias"
+                        name="alias"
+                        value={url.alias}
+                        onChange={handleChange}
+                   />
+                </div>
 
-                >
-                    Shorten  
-                </button>
+                <div className="form--searchbox">
+                    <input 
+                        type="text"
+                        placeholder="www.reallyLongURL/NeedsShortening.com"
+                        className="form--inputURL"
+                        name="longURL"
+                        value={url.longURL}
+                        onChange={handleChange}
+                        onKeyDown={handleKeyDown}
+                    />
+                    <button
+                        className='form--button'
+                        onClick={fetchTinyURL}
+
+                    >
+                        Shorten  
+                    </button>
+                </div>
             </div>
+
             <div>
                 {urlElements}
             </div>
-        </main>
+        </div>
     )
 }
