@@ -1,6 +1,7 @@
 import React from 'react'
+import URLCollection from './URLCollection'
 import { auth, firestore, usersCollection } from '../firebase'
-import { addDoc, onSnapshot, collection } from 'firebase/firestore'
+import { addDoc, doc, onSnapshot, collection, deleteDoc } from 'firebase/firestore'
 
 // Import the environment variables from the `.env` file using Vite's `import.meta.env`
 const API_TOKEN = import.meta.env.VITE_API_TOKEN
@@ -10,10 +11,12 @@ export default function URL(props) {
     const [url, setURL] = React.useState({
         longURL: "",
         alias: "",
-        tiny_url: ""
+        tiny_url: "",
     })
 
     const [allURLs, setAllURLs] = React.useState([])
+
+    console.log(allURLs)
 
     // use onSnapshot to update allURLs `state`
     React.useEffect(() => {
@@ -23,7 +26,10 @@ export default function URL(props) {
         // user clean-up function to avoid memory leak
         const unsubscribe = onSnapshot(
             currentUserCollection, function (snapshot) {
-                const updatedURLs = snapshot.docs.map((doc) => doc.data())
+                const updatedURLs = snapshot.docs.map((doc) => ({
+                    ...doc.data(),
+                    id: doc.id
+                }))
                 setAllURLs(updatedURLs)
             }
         )
@@ -32,7 +38,8 @@ export default function URL(props) {
 
     // save URL to firestore database 
     async function saveURL() {
-        const newURL = await fetchTinyURL()
+        // obtain new url object
+        const tempURL = await fetchTinyURL()
 
         // get user uid from auth.currentUser
         const userID = props.user.uid
@@ -40,9 +47,9 @@ export default function URL(props) {
         // update firestore collection
         try {
             const currentUserCollection = collection(firestore, `users/${userID}/urls`)
-            const docRef = await addDoc(currentUserCollection, newURL)
-            setURL(newURL)
-
+            const docRef = await addDoc(currentUserCollection, tempURL)
+            // const newURL = {...tempURL, id: docRef.id}
+            // setURL(newURL)
             console.log("URL document written with ID: ", docRef.id)
         } catch (error) {
             console.log(`Error adding URL doc to user ${userID}`)
@@ -71,7 +78,7 @@ export default function URL(props) {
                 })
             
             const data = await response.json()
-            console.log(data)
+
             const newURL = {
                 ...url,
                 alias: data.data.alias,
@@ -83,7 +90,20 @@ export default function URL(props) {
             console.error(error);
             console.log("wassup bot")
             // Handle any errors here
-          }
+        }
+    }
+
+    async function deleteURL(urlID) {
+        const userID = props.user.uid
+        const currentUserCollection = collection(firestore, `users/${userID}/urls`)
+        const docRef = doc(currentUserCollection, urlID)
+
+        try {
+            await deleteDoc(docRef)
+            console.log(`URL with ID ${urlID} deleted successfully.`);
+        } catch (error) {
+          console.error(`Error deleting URL with ID ${urlID}:`, error);
+        }
     }
       
 
@@ -101,13 +121,6 @@ export default function URL(props) {
             fetchTinyURL(event)
         }
     }
-    
-    /** NOTE -> will later change this into a sidebar component!!!! **/
-    const urlElements = allURLs.map((prevURL, index) => (
-        <div key={index}>
-            <a href={prevURL.tiny_url} target="_blank" rel="noopener noreferrer">{prevURL.tiny_url}</a>
-        </div>
-    ))
 
     return (
         <div>
@@ -143,9 +156,7 @@ export default function URL(props) {
                 </div>
             </div>
 
-            <div>
-                {urlElements}
-            </div>
+            <URLCollection deleteURL={deleteURL} allURLs={allURLs} />
         </div>
     )
 }

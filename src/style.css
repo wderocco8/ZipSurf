@@ -1,6 +1,7 @@
 * {
     background-color: #F5F5F5;
     font-family: Karla;
+    user-select: none;
 }
 
 .welcome-msg {
@@ -119,6 +120,13 @@ input:-webkit-autofill {
     justify-content: center;
 }
 
+.all-urls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 /* styling Google sign in button (src --> PedroTech) */
 .google-btn {
     transition: background-color 0.3s, box-shadow 0.3s;
@@ -158,3 +166,72 @@ input:-webkit-autofill {
     cursor: not-allowed;
   }
 /* end styling Google sign in... */
+
+
+/* start styling delete buttons (src --> https://www.youtube.com/watch?v=IwOhw82h2u0&t=143s&ab_channel=OnlineTutorials) */
+.delete-btn-container {
+    position: relative;
+    width: 350px;
+    height: 50px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    /* background-color: #b7bcc3; */
+    /* overflow: hidden; */
+    margin-bottom: 5px;
+
+}
+
+.delete-btn-container a {
+    background-color: inherit;
+}
+
+.delete-btn-container span {
+    position: absolute;
+    /* left: 40px; */
+    background-color:#7D7D7D;
+    right: 50px;
+    width: 18px;
+    height: 20px;
+    display: inline-block;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+
+.delete-btn::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    width: 100%;
+    height: 2px;
+    left: 0px;
+    right: 0px;
+    background: #7D7D7D;
+    box-shadow: 12px -2px 0  #F5F5F5,
+    6px -2px 0 #7D7D7D;
+    transition: 0.5s;
+}
+
+.delete-btn:hover {
+    transform: scale(1.5) rotate(-60deg) translateY(5px);
+    cursor: grab;
+}
+
+.delete-btn:hover::before {
+    transform: rotate(90deg) translateX(-50%) translateY(-10px);
+}
+
+.delete-url {
+    position: absolute;
+    left: 30px;
+    transition: 0.5s;
+}
+
+.delete-btn:hover + .delete-url {
+    transform: translateX(150px) translateY(-5px) scale(0);
+}
+
+/* end styling delete buttons */

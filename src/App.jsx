@@ -32,7 +32,7 @@ export default function App() {
                 {isAuthenticated && (
                     <div className='welcome-msg-content'>
                         <div>
-                            <p>Hello {user.displayName}!</p>
+                            <p>Hello, {user.displayName}!</p>
                         </div>
                         <div>
                             <button className='google-btn' onClick={handleSignOut}>Sign out?</button>
