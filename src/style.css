@@ -8,12 +8,22 @@
     display: flex;
     justify-content: flex-end;
 }
-  
-.welcome-msg-content {
+
+.welcome-msg-content span {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: center;
 }
+
+.dropdown-button {
+    all: unset;
+}
+
+.welcome-msg img {
+    margin-left: 10px;
+    width: 40px;
+    border-radius: 100%;
+}  
   
 .header {
     display: flex;
@@ -171,28 +181,40 @@ input:-webkit-autofill {
 /* start styling delete buttons (src --> https://www.youtube.com/watch?v=IwOhw82h2u0&t=143s&ab_channel=OnlineTutorials) */
 .delete-btn-container {
     position: relative;
-    width: 350px;
+    width: 450px;
     height: 50px;
     border-radius: 4px;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: 0.5s;
-    /* background-color: #b7bcc3; */
+    /* background-color: black; */
     /* overflow: hidden; */
     margin-bottom: 5px;
 
 }
 
-.delete-btn-container a {
-    background-color: inherit;
+.delete-url {
+    position: absolute;
+    z-index: 1;
+    max-width: 325px;
+    left: 35px;
+    transition: 0.5s;
+    white-space: nowrap;
+    overflow: scroll;
+    /* text-overflow: ellipsis; */
 }
 
-.delete-btn-container span {
+.delete-url a {
+    width: 100px;
+}
+
+.delete-btn {
     position: absolute;
+    z-index: 2;
     /* left: 40px; */
     background-color:#7D7D7D;
-    right: 50px;
+    right: 30px;
     width: 18px;
     height: 20px;
     display: inline-block;
@@ -224,14 +246,7 @@ input:-webkit-autofill {
     transform: rotate(90deg) translateX(-50%) translateY(-10px);
 }
 
-.delete-url {
-    position: absolute;
-    left: 30px;
-    transition: 0.5s;
-}
-
 .delete-btn:hover + .delete-url {
-    transform: translateX(150px) translateY(-5px) scale(0);
+    transform: translateX(200px) translateY(-5px) scale(0);
 }
-
 /* end styling delete buttons */
