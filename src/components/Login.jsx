@@ -2,7 +2,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { auth } from '../firebase'
-import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth"
+import { GoogleAuthProvider, signInWithPopup} from "firebase/auth"
 
 export default function Login() {
     
@@ -11,7 +11,7 @@ export default function Login() {
 
         const provider = new GoogleAuthProvider()
 
-        signInWithRedirect(auth, provider)
+        signInWithPopup(auth, provider)
           .then((result) => {
             const name = result.user.displayName
             const email = result.user.email

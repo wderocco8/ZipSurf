@@ -8,15 +8,15 @@ const API_TOKEN = import.meta.env.VITE_API_TOKEN
 
 export default function URL(props) {
 
+    // state to keep track of text within input fields
     const [url, setURL] = React.useState({
         longURL: "",
         alias: "",
         tiny_url: ""
     })
 
+    // state to maintain all urls (displayed through URLCollection)
     const [allURLs, setAllURLs] = React.useState([])
-
-    console.log(allURLs)
 
     // use onSnapshot to update allURLs `state`
     React.useEffect(() => {
@@ -86,7 +86,7 @@ export default function URL(props) {
                 })
             
             const data = await response.json()
-            console.log(data) // IMPORTANT
+            // console.log(data) // IMPORTANT
 
             const newURL = {
                 ...url,

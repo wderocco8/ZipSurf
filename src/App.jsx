@@ -31,11 +31,12 @@ export default function App() {
     // console.log("user is", user !== null && user.photoURL)
     return (
         <main>
-            <Navbar 
-                isAuthenticated={isAuthenticated}
-                user={user}
-                handleSignOut={handleSignOut}
-            />
+            {isAuthenticated &&
+                <Navbar 
+                    user={user}
+                    handleSignOut={handleSignOut}
+                />
+            }
 
             <Header />
             {isAuthenticated ? <URL user={user} /> : <Login />}
