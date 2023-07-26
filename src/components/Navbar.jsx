@@ -40,13 +40,30 @@ export default function Navbar({ user, handleSignOut }) {
 function NavItem(props) {
 
     const [open, setOpen] = React.useState(false)
+    // **PRACTICE MORE WITH useRef**
+    const ref = React.useRef(null)
 
     function toggleOpen() {
         setOpen(!open)
     }
 
+    // useEffect to add mousedown event listener on entire document
+    React.useEffect(() => {
+        function handleClickOutside(event) {
+            // console.log("testing...", ref.current, "....", event.target)
+            if (ref.current && !ref.current.contains(event.target)) {
+                setOpen(false)
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    })
+
     return (
-        <li className='nav-item'>
+        <li ref={ref} className='nav-item'>
             <a href='#' className='icon-button' onClick={toggleOpen}>
                 {props.icon}
             </a>

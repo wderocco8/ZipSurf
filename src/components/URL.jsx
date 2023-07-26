@@ -2,9 +2,9 @@ import React from 'react'
 import URLCollection from './URLCollection'
 import { usersCollection } from '../firebase'
 import { addDoc, doc, onSnapshot, collection, deleteDoc } from 'firebase/firestore'
-
 // Import the environment variables from the `.env` file using Vite's `import.meta.env`
 const API_TOKEN = import.meta.env.VITE_API_TOKEN
+
 
 export default function URL(props) {
 
@@ -14,6 +14,9 @@ export default function URL(props) {
         alias: "",
         tiny_url: ""
     })
+
+    const [charLeft, setCharLeft] = React.useState(30)
+    const charColor = charLeft === 0 && '#ff6363'
 
     // state to maintain all urls (displayed through URLCollection)
     const [allURLs, setAllURLs] = React.useState([])
@@ -60,6 +63,7 @@ export default function URL(props) {
                 alias: "",
                 tiny_url: ""
             })
+            setCharLeft(30)
             console.log("URL document written with ID: ", docRef.id)
         } catch (error) {
             console.log(`Error adding URL doc to user ${userID}`)
@@ -117,10 +121,16 @@ export default function URL(props) {
 
     function handleChange(event) {
         const {name, value} = event.target
-        setURL(prevURL => ({
-            ...prevURL,
+        setURL(prevState => ({
+            ...prevState,
             [name]: value
         }))
+
+        // update character limit if this is alias
+        if (name == "alias") {
+            const leftover = 30 - value.length
+            setCharLeft(leftover)
+        }
     }
 
     function handleKeyDown(event) {
@@ -141,7 +151,12 @@ export default function URL(props) {
                         name="alias"
                         value={url.alias}
                         onChange={handleChange}
+                        maxLength="30"
                    />
+                   {
+                    charLeft < 30 &&
+                    <p style={{color: charColor}} className='form-charCount'>{charLeft} characters left</p>
+                   }
                 </div>
 
                 <div className="form--searchbox">
