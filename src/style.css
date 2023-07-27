@@ -286,8 +286,6 @@ input:-webkit-autofill {
   }
   .google-btn:focus {
     outline: none;
-    /* box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25),
-      0 0 0 3px #c8dafc; */
   }
   .google-btn:disabled {
     filter: grayscale(100%);
@@ -301,7 +299,7 @@ input:-webkit-autofill {
 /* start styling delete buttons (src --> https://www.youtube.com/watch?v=IwOhw82h2u0&t=143s&ab_channel=OnlineTutorials) */
 .delete-btn-container {
     position: relative;
-    width: 450px;
+    width: 400px;
     height: 50px;
     display: flex;
     /* justify-content: center; */
@@ -337,7 +335,7 @@ input:-webkit-autofill {
     position: absolute;
     z-index: 1;
     max-width: 325px;
-    left: 60px;
+    left: 40px;
     transition: 0.5s;
     white-space: nowrap;
     overflow: scroll;

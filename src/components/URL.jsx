@@ -12,7 +12,8 @@ export default function URL(props) {
     const [url, setURL] = React.useState({
         longURL: "",
         alias: "",
-        tiny_url: ""
+        tiny_url: "",
+        createdAt: ""
     })
 
     const [charLeft, setCharLeft] = React.useState(30)
@@ -20,6 +21,10 @@ export default function URL(props) {
 
     // state to maintain all urls (displayed through URLCollection)
     const [allURLs, setAllURLs] = React.useState([])
+
+    // sort notes array (to pass into URLCollection component)
+    const sortedURLs = allURLs.sort((a, b) => b.createdAt - a.createdAt)
+
 
     // use onSnapshot to update allURLs `state`
     React.useEffect(() => {
@@ -90,12 +95,13 @@ export default function URL(props) {
                 })
             
             const data = await response.json()
-            // console.log(data) // IMPORTANT
+            console.log(data) // IMPORTANT
 
             const newURL = {
                 ...url,
                 alias: data.data.alias,
-                tiny_url: data.data.tiny_url
+                tiny_url: data.data.tiny_url,
+                createdAt: Date.now()
             }
 
             return newURL
@@ -179,7 +185,7 @@ export default function URL(props) {
                 </div>
             </div>
 
-            <URLCollection deleteURL={deleteURL} allURLs={allURLs} />
+            <URLCollection deleteURL={deleteURL} allURLs={sortedURLs} />
         </div>
     )
 }
