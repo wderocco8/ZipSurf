@@ -156,6 +156,14 @@ ul {
     font-style: italic;
     margin-bottom: 60px;
 }
+.description-signIn {
+    width: 375px;
+    text-align: center;
+    font-size: 24px;
+    /* font-style: italic; */
+    /* margin-bottom: 60px; */
+}
+
 
  
 /* styling form */
@@ -334,7 +342,7 @@ input:-webkit-autofill {
 .delete-url {
     position: absolute;
     z-index: 1;
-    max-width: 325px;
+    max-width: 275px;
     left: 40px;
     transition: 0.5s;
     white-space: nowrap;

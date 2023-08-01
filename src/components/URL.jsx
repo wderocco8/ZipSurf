@@ -1,5 +1,7 @@
 import React from 'react'
 import URLCollection from './URLCollection'
+import Navbar from './Navbar'
+import Header from './Header'
 import { usersCollection } from '../firebase'
 import { addDoc, doc, onSnapshot, collection, deleteDoc } from 'firebase/firestore'
 // Import the environment variables from the `.env` file using Vite's `import.meta.env`
@@ -49,6 +51,18 @@ export default function URL(props) {
         // error empty url attempt
         if (url.longURL === "") {
             alert("Must enter valid URL")
+            return
+        }
+        // error invalid alias (too short)
+        if (url.alias.length > 5 && url.alias.length < 5) {
+            alert("Alias must be at least 5 characters")
+            return
+        }
+        // error duplicate url (already stored in database)
+        const longURLs = allURLs.map(url => url.longURL)
+        if (longURLs.includes(url.longURL)) {
+            alert("URL already saved below")
+            return
         }
 
         // obtain new url object
@@ -57,22 +71,24 @@ export default function URL(props) {
         // get user uid from auth.currentUser
         const userID = props.user.uid
 
-        try {
-            // update firestore collection
-            const currentUserCollection = collection(usersCollection, `${userID}/urls`)
-            const docRef = await addDoc(currentUserCollection, tempURL)
-
-            // reset URL to empty string
-            setURL({
-                longURL: "",
-                alias: "",
-                tiny_url: ""
-            })
-            setCharLeft(30)
-            console.log("URL document written with ID: ", docRef.id)
-        } catch (error) {
-            console.log(`Error adding URL doc to user ${userID}`)
-        }
+        // only try to update collection if found valid tinyUrl
+            try {
+                // update firestore collection
+                const currentUserCollection = collection(usersCollection, `${userID}/urls`)
+                const docRef = await addDoc(currentUserCollection, tempURL)
+    
+                // reset URL to empty string
+                setURL({
+                    longURL: "",
+                    alias: "",
+                    tiny_url: ""
+                })
+                setCharLeft(30)
+                console.log("URL document written with ID: ", docRef.id)
+            } catch (error) {
+                console.log(`Error adding URL doc to user ${userID}`)
+            }
+        
     }
 
     // obtian tiny URL from API
@@ -95,7 +111,17 @@ export default function URL(props) {
                 })
             
             const data = await response.json()
-            console.log(data) // IMPORTANT
+            console.log(data)
+
+            // error checking
+            if (data.errors[0] === "Alias is not available.") {
+                alert(`Alias "${body.alias}" is not available.`)
+                return false
+            } else if (data.errors[0] === "Invalid URL.") {
+                alert("Invalid URL.")
+                return false
+            }
+            // console.log(data.errors[0]==="Alias is not available.") // IMPORTANT
 
             const newURL = {
                 ...url,
@@ -148,6 +174,12 @@ export default function URL(props) {
 
     return (
         <div>
+            <Navbar 
+                user={props.user}
+                handleSignOut={props.handleSignOut}
+                allURLs={allURLs}
+            />
+            <Header isAuthenticated={true} />
             <div className="form">
                 <div className="form--alias">
                     <input 

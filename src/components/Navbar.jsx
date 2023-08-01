@@ -4,9 +4,10 @@ import { collection, getDocs, deleteDoc } from 'firebase/firestore'
 import Export from '../icons/Export.svg'
 import DeleteSweep from '../icons/DeleteSweep.svg'
 import LogoutIcon from '../icons/LogoutIcon.svg'
+import { gapi } from 'gapi-script'
 
 
-export default function Navbar({ user, handleSignOut }) {
+export default function Navbar({ user, handleSignOut, allURLs }) {
     const userID = user.uid
     const currentUserCollection = collection(usersCollection, `${userID}/urls`)
 
@@ -30,7 +31,12 @@ export default function Navbar({ user, handleSignOut }) {
             <ul className='navbar-nav'>
                 Hello, {user.displayName}! 
                 <NavItem icon={<img src={user.photoURL} alt={user.displayName[0]} className='icon--img' />} >
-                    <DropdownMenu handleSignOut={handleSignOut} deleteAllURLs={deleteAllURLs} />
+                    {/* NOTE: dropdown acts as props (later referred to as props.children) */}
+                    <DropdownMenu
+                        deleteAllURLs={deleteAllURLs} 
+                        handleSignOut={handleSignOut}
+                        allURLs={allURLs}
+                    />
                 </NavItem>
             </ul>
         </nav>
@@ -67,15 +73,14 @@ function NavItem(props) {
             <a href='#' className='icon-button' onClick={toggleOpen}>
                 {props.icon}
             </a>
-
+            
             {/* render dropdown menu */}
             {open && props.children}
         </li>
     )
 }
 
-function DropdownMenu({ deleteAllURLs, handleSignOut }) {
-    
+function DropdownMenu({ handleSignOut, deleteAllURLs, allURLs }) {
     // NESTED component O___O
     function DropdownItem(props) {
         // conditionally add red-text to class (for deleteAllURLs)
@@ -95,7 +100,7 @@ function DropdownMenu({ deleteAllURLs, handleSignOut }) {
 
     return (
         <div className='dropdown'>
-            <DropdownItem>
+            <DropdownItem onClick={() => handleExportURLs(allURLs)}>
                 <img src={Export} alt="" />
                 Export All URLs
             </DropdownItem>
@@ -109,4 +114,121 @@ function DropdownMenu({ deleteAllURLs, handleSignOut }) {
             </DropdownItem>
         </div>
     )
+}
+
+
+
+
+
+
+
+
+/* EXPORTING URLS USING GOOGLE DOCS API  */
+const handleExportURLs = async (allURLs) => {
+    // check if user is signed in
+    const isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get()
+    if (!isSignedIn) {
+        try {
+            await handleSignIn()
+        } catch (error) {
+            
+        }
+    }
+    exportURLs(allURLs)
+}
+
+const handleSignIn = async () => {
+    try {
+        await gapi.auth2.getAuthInstance().signIn() 
+    } catch (error) {
+        console.log("Error signing in", error)
+    }
+}
+
+
+function zerofill(i) {
+    return (i < 10 ? '0' : '') + i
+}
+
+function getDateString() {
+    const date = new Date
+    const year = date.getFullYear()
+    const month = zerofill(date.getMonth() + 1)
+    const day = zerofill(date.getDate())
+    return month + '/' + day + '/' + year
+}
+
+// google docs API functions
+const exportURLs = async (allURLs) => {
+    // map urls to a list of their tinyURLs
+    const tinyURLs = allURLs.map(url => url.tiny_url)
+    // const tinyURLs = ["10", "20", "30"]
+    console.log(tinyURLs)
+
+    try {
+        console.log(allURLs)
+        // get current date
+        const date = getDateString()
+
+        // define filename
+        const filename = `ZipSurf URL Collection -- ${date}`
+        const requestBody = {
+            title: filename, // Replace 'filename' with the desired title for your Google Doc
+        }
+
+
+        // obtain user's access token (2 methods -- both work)
+        // const accessToken = userResult.getAuthResponse().access_token // line below works too
+        const accessToken = gapi.auth.getToken().access_token
+        console.log(accessToken)
+
+        // call API with accessToken obtained from user
+        const response = await fetch('https://docs.googleapis.com/v1/documents', {
+            method: 'POST',
+            headers: new Headers({ 
+                'Authorization': `Bearer ${accessToken}`, 
+                'Content-Type': 'application/json',
+            }),
+            body: JSON.stringify(requestBody)
+        })
+
+        const data = await response.json()
+        console.log('Google doc created:', data)
+
+        // extract document id
+        const documentId = data.documentId
+
+        // insert content into new doc
+        const contentrequestBody = {
+            // map each url to a new line using `insertText`
+            requests: tinyURLs.reverse().map((tinyURL, index) => {
+              return {
+                insertText: {
+                  text: `${tinyURL.trim()}\n\n`,
+                  location: {
+                    index: 1,
+                  },
+                },
+              };
+            }),
+          };
+                 
+
+        const insertResponse = await fetch(`https://docs.googleapis.com/v1/documents/${documentId}:batchUpdate`, {
+            method: 'POST',
+            headers: new Headers({ 
+                'Authorization': `Bearer ${accessToken}`, 
+                'Content-Type': 'application/json',
+            }),
+            body: JSON.stringify(contentrequestBody)
+        })
+
+        const insertData = await insertResponse.json()
+        console.log("Content inserted into the document:", insertData)
+
+        window.open("https://docs.google.com/document/d/" + data.documentId + "/edit", "_blank")
+    }
+    catch (error) {
+        console.log('Error creating Google doc', error)
+    }
 }
