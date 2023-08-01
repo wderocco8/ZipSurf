@@ -23,7 +23,7 @@ export default function App() {
         return unsubscribe
     }, [])
 
-    // load/initialize google docs API library
+    // load + initialize google docs API library
     React.useEffect(() => {
         gapi.load('client:auth2', () => {
             gapi.client.init({
@@ -45,11 +45,8 @@ export default function App() {
     // console.log("user is", user !== null && user.photoURL)
     return (
         <main>
-            {/* {isAuthenticated && <button onClick={() => handleExportURLs("hello")}>create doc</button>} */}
             
-            {
-                isAuthenticated 
-                ? 
+            {isAuthenticated ? 
                 <URL 
                     user={user} 
                     handleSignOut={handleSignOut}

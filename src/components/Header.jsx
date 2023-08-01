@@ -10,7 +10,7 @@ export default function Header(props) {
                 <p className='description'>Enter any valid link that is too longggggggg!!</p>
                 :
                 <div className='description-signIn'>
-                    <p>Sign in below to start ZipSurfing your long urls:</p>
+                    <p>Sign in below to start <i>zipping</i> your long urls:</p>
                 </div>
 
             }

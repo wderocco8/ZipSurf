@@ -357,7 +357,7 @@ input:-webkit-autofill {
     position: absolute;
     z-index: 2;
     /* left: 40px; */
-    background-color:#7D7D7D;
+    background-color:var(--gray-color);
     right: 30px;
     width: 18px;
     height: 20px;
@@ -373,11 +373,9 @@ input:-webkit-autofill {
     top: -3px;
     width: 100%;
     height: 2px;
-    left: 0px;
-    right: 0px;
-    background: #7D7D7D;
-    box-shadow: 12px -2px 0  #F5F5F5,
-    6px -2px 0 #7D7D7D;
+    background: var(--gray-color);
+    box-shadow: 12px -2px 0 var(--main-bg),
+    6px -2px 0 var(--gray-color);
     transition: 0.5s;
 }
 

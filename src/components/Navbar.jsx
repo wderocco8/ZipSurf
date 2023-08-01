@@ -8,6 +8,7 @@ import { gapi } from 'gapi-script'
 
 
 export default function Navbar({ user, handleSignOut, allURLs }) {
+
     const userID = user.uid
     const currentUserCollection = collection(usersCollection, `${userID}/urls`)
 
@@ -131,7 +132,7 @@ const handleExportURLs = async (allURLs) => {
         try {
             await handleSignIn()
         } catch (error) {
-            
+            console.log("Error authenticating with google:", error)
         }
     }
     exportURLs(allURLs)
@@ -158,31 +159,35 @@ function getDateString() {
     return month + '/' + day + '/' + year
 }
 
+function getTimeString() {
+    const date = new Date()
+    return date.toLocaleTimeString()
+}
+
 // google docs API functions
 const exportURLs = async (allURLs) => {
     // map urls to a list of their tinyURLs
     const tinyURLs = allURLs.map(url => url.tiny_url)
-    // const tinyURLs = ["10", "20", "30"]
     console.log(tinyURLs)
 
     try {
         console.log(allURLs)
         // get current date
         const date = getDateString()
+        const time = getTimeString()
 
         // define filename
-        const filename = `ZipSurf URL Collection -- ${date}`
+        const filename = `ZipSurf URL Collection -- ${date} ${time}`
         const requestBody = {
             title: filename, // Replace 'filename' with the desired title for your Google Doc
         }
 
-
         // obtain user's access token (2 methods -- both work)
-        // const accessToken = userResult.getAuthResponse().access_token // line below works too
+        // const accessToken = userResult.getAuthResponse().access_token // this requires getting user first
         const accessToken = gapi.auth.getToken().access_token
         console.log(accessToken)
 
-        // call API with accessToken obtained from user
+        // API 1: use user accessToken to createDoc
         const response = await fetch('https://docs.googleapis.com/v1/documents', {
             method: 'POST',
             headers: new Headers({ 
@@ -198,22 +203,33 @@ const exportURLs = async (allURLs) => {
         // extract document id
         const documentId = data.documentId
 
-        // insert content into new doc
+        // API 2 insert content into new doc
         const contentrequestBody = {
             // map each url to a new line using `insertText`
             requests: tinyURLs.reverse().map((tinyURL, index) => {
-              return {
-                insertText: {
-                  text: `${tinyURL.trim()}\n\n`,
-                  location: {
+              return [
+                {insertText: {
+                    text: `${tinyURL.trim()}\n\n`,
+                    location: {
                     index: 1,
-                  },
-                },
-              };
-            }),
-          };
+                    },
+                }},
+                { updateTextStyle: {
+                    textStyle: {
+                        link: {
+                            url: tinyURL,
+                        }
+                    },
+                    range: {
+                        startIndex: 1,
+                        endIndex: tinyURL.length + 1,
+                    },
+                    fields: 'link',
+                }}
+                ]
+            })
+          }
                  
-
         const insertResponse = await fetch(`https://docs.googleapis.com/v1/documents/${documentId}:batchUpdate`, {
             method: 'POST',
             headers: new Headers({ 
