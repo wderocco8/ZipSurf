@@ -1,22 +1,27 @@
 * {
-    /* background-color: #F5F5F5; */
-    font-family: Karla;
+    font-family: 'Karla';
     user-select: none;
 }
 
 :root {
     --nav-size: 60px;
     --speed: 1ms;
-    --main-bg: #F5F5F5;
-    --nav-bg:  rgb(226, 236, 255);
+    --main-bg-light: #F5F5F5;
+    --main-bg-dark: #121212;
+    --nav-bg:  #e2ecff;
     --border-radius: 8px;
     --gray-color: #757575;
+    --blue-color: #2A00FF;
 }
 
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--main-bg);
+    background-color: var(--main-bg-light);
+}
+
+#dark {
+    background-color: var(--main-bg-dark);
 }
 
 /* styling navbar */
@@ -146,7 +151,7 @@ ul {
 }
 
 .blue-text {
-    color: #2A00FF;
+    color: var(--blue-color);
 }
 
 .description {
@@ -350,6 +355,10 @@ input:-webkit-autofill {
 }
 
 .delete-url a {
+    color: var(--gray-color);
+}
+
+.delete-url a {
     width: 100px;
 }
 
@@ -374,7 +383,7 @@ input:-webkit-autofill {
     width: 100%;
     height: 2px;
     background: var(--gray-color);
-    box-shadow: 12px -2px 0 var(--main-bg),
+    box-shadow: 12px -2px 0 var(--main-bg-light),
     6px -2px 0 var(--gray-color);
     transition: 0.5s;
 }

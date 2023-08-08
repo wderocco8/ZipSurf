@@ -7,7 +7,7 @@ import LogoutIcon from '../icons/LogoutIcon.svg'
 import handleExportURLs from '../functions/googleDocs'
 
 
-export default function Navbar({ user, handleSignOut, allURLs }) {
+export default function Navbar({ user, handleSignOut, allURLs, toggleTheme }) {
 
     const userID = user.uid
     const currentUserCollection = collection(usersCollection, `${userID}/urls`)
@@ -30,7 +30,8 @@ export default function Navbar({ user, handleSignOut, allURLs }) {
     return (
         <nav className='navbar'>
             <ul className='navbar-nav'>
-                Hello, {user.displayName}! 
+                Hello, {user.displayName}!
+                <button onClick={toggleTheme}>theme</button>
                 <NavItem icon={<img src={user.photoURL} alt={user.displayName[0]} className='icon--img' />} >
                     {/* NOTE: dropdown acts as props (later referred to as props.children) */}
                     <DropdownMenu

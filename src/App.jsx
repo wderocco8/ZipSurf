@@ -41,15 +41,23 @@ export default function App() {
             console.log(error)
         }
     }
+
+    // set dark/light mode theme
+    const [theme, setTheme] = React.useState("light")
+
+    const toggleTheme = () => {
+        setTheme(currTheme => (currTheme === "light" ? "dark" : "light"))
+    }
+    console.log(theme)
     
     // console.log("user is", user !== null && user.photoURL)
     return (
-        <main>
-            
+        <main id={theme}>
             {isAuthenticated ? 
                 <URL 
                     user={user} 
                     handleSignOut={handleSignOut}
+                    toggleTheme={toggleTheme}
                 /> 
                 : 
                 <div>
