@@ -30,8 +30,8 @@ export default function Navbar({ user, handleSignOut, allURLs, toggleTheme }) {
     return (
         <nav className='navbar'>
             <ul className='navbar-nav'>
+                <button className='theme' onClick={toggleTheme}>theme</button>
                 Hello, {user.displayName}!
-                <button onClick={toggleTheme}>theme</button>
                 <NavItem icon={<img src={user.photoURL} alt={user.displayName[0]} className='icon--img' />} >
                     {/* NOTE: dropdown acts as props (later referred to as props.children) */}
                     <DropdownMenu
@@ -104,7 +104,7 @@ function DropdownMenu({ handleSignOut, deleteAllURLs, allURLs }) {
         <div className='dropdown'>
             <DropdownItem onClick={() => handleExportURLs(allURLs)}>
                 <img src={Export} alt="" />
-                Export All URLs
+                <p>Export All URLs</p>
             </DropdownItem>
             <DropdownItem redText onClick={deleteAllURLs} >
                 <img className='delete-all' src={DeleteSweep} alt="" />

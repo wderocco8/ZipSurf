@@ -54,7 +54,7 @@ export default function URL(props) {
             return
         }
         // error invalid alias (too short)
-        if (url.alias.length > 5 && url.alias.length < 5) {
+        if (url.alias.length > 0 && url.alias.length < 5) {
             alert("Alias must be at least 5 characters")
             return
         }

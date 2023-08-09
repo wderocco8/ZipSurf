@@ -5,7 +5,7 @@ export default function Header(props) {
         <div className='header'>
             <h1 className='title'>
                 <span className='blue-text'>Zip</span>Surf
-                <img width={50} src="../src/icons/favicon.ico" />
+                {/* <img width={50} src="../src/icons/favicon.ico" /> */}
             </h1>
             {props.isAuthenticated ?
                 <p className='description'>Enter any valid link that is too longggggggg!!</p>

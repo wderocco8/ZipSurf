@@ -1,17 +1,29 @@
 * {
     font-family: 'Karla';
     user-select: none;
+    color: black
+}
+
+#dark * {
+    color:white;
 }
 
 :root {
     --nav-size: 60px;
     --speed: 1ms;
-    --main-bg-light: #F5F5F5;
-    --main-bg-dark: #121212;
-    --nav-bg:  #e2ecff;
     --border-radius: 8px;
+
+    --main-bg-light: #F5F5F5;
+    --nav-bg-light:  #e2ecff;
+
     --gray-color: #757575;
     --blue-color: #2A00FF;
+
+    --main-bg-dark: #262626;
+    --nav-bg-dark: #121212;
+    --text-color-dark: #ffffff;
+    --blue-color-dark: #7F65FF;
+
 }
 
 body {
@@ -20,7 +32,7 @@ body {
     background-color: var(--main-bg-light);
 }
 
-#dark {
+body.dark {
     background-color: var(--main-bg-dark);
 }
 
@@ -33,14 +45,17 @@ ul {
 
 .navbar a {
     text-decoration: none;
-    color: black;
 }
 
 .navbar {
     height: var(--nav-size);
-    background-color: var(--nav-bg);
+    background-color: var(--nav-bg-light);
     padding: 0 1rem;
-    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 4px rgba(62, 60, 60, 0.579);
+}
+
+#dark .navbar {
+    background-color: var(--nav-bg-dark);
 }
 
 .navbar-nav {
@@ -57,6 +72,10 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.theme {
+    margin-right: auto;
 }
 
 .icon-button {
@@ -89,7 +108,7 @@ ul {
     top: 58px;
     width: 250px; 
     transform: translateX(-45%);
-    background-color: var(--nav-bg);
+    background-color: var(--nav-bg-light);
     filter: brightness(1.02);
     border-radius: var(--border-radius);
     padding: 1rem; 
@@ -99,6 +118,13 @@ ul {
     align-items: center;
     box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
 }
+
+#dark .dropdown {
+    background-color: var(--nav-bg-dark);
+    box-shadow: 0 1px 20px rgba(255, 255, 255, 0.1);
+
+}
+
 
 /* styling icons (manually adjust delete-all button) */
 .dropdown img {
@@ -128,6 +154,10 @@ ul {
     background-color:rgb(191, 212, 252);
 }
 
+#dark .menu-item:hover {
+    background-color: #38383e;
+}
+
 .red-text {
     color: red !important;
 }
@@ -154,6 +184,10 @@ ul {
     color: var(--blue-color);
 }
 
+#dark .blue-text {
+    color: var(--blue-color-dark);
+}
+
 .description {
     width: 300px;
     text-align: center;
@@ -170,7 +204,7 @@ ul {
 }
 
 
- 
+
 /* styling form */
 .form {
     display: flex;
@@ -193,6 +227,10 @@ ul {
     outline: none;
 }
 
+#dark .form--alias {
+    box-shadow: 0px 4px 4px 0px rgba(193, 193, 193, 0.35);
+}
+
 .form--inputAlias {
     border: none;
     padding-left: 20px;
@@ -201,6 +239,10 @@ ul {
     outline: none;
     white-space: nowrap;
     overflow: scroll;
+}
+
+#dark .form--inputAlias {
+    color: black;
 }
 
 .form-charCount {
@@ -222,12 +264,21 @@ ul {
     margin-bottom: 50px;
 }
 
+#dark .form--searchbox {
+    box-shadow: 0px 4px 4px 0px rgba(193, 193, 193, 0.35);
+}
+
+
 .form--inputURL {
     border: none;
     background-color: #FFFFFF;
     padding-left: 25px;
     width: 300px;
     outline: none;
+}
+
+#dark .form--inputURL {
+    color: black;
 }
 
 .form--button {
@@ -358,8 +409,8 @@ input:-webkit-autofill {
     color: var(--gray-color);
 }
 
-.delete-url a {
-    width: 100px;
+#dark .delete-url a {
+    color: var(--gray-color)
 }
 
 .delete-btn {
@@ -385,7 +436,12 @@ input:-webkit-autofill {
     background: var(--gray-color);
     box-shadow: 12px -2px 0 var(--main-bg-light),
     6px -2px 0 var(--gray-color);
-    transition: 0.5s;
+    /* transition: 0.5s; */
+}
+
+#dark .delete-btn::before {
+    box-shadow: 12px -2px 0 var(--main-bg-dark),
+    6px -2px 0 var(--gray-color);
 }
 
 .delete-btn:hover {

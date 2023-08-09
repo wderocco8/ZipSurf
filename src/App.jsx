@@ -49,6 +49,7 @@ export default function App() {
         setTheme(currTheme => (currTheme === "light" ? "dark" : "light"))
     }
     console.log(theme)
+    document.body.className = theme;
     
     // console.log("user is", user !== null && user.photoURL)
     return (
