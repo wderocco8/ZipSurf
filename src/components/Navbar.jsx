@@ -1,13 +1,15 @@
 import React from 'react'
 import { usersCollection } from '../firebase'
 import { collection, getDocs, deleteDoc } from 'firebase/firestore'
-import Export from '../icons/Export.svg'
+import ExportIconLight from '../icons/Export_light.svg'
+import ExportIconDark from '../icons/Export_dark.svg'
 import DeleteSweep from '../icons/DeleteSweep.svg'
-import LogoutIcon from '../icons/LogoutIcon.svg'
+import LogoutIconLight from '../icons/LogoutIcon_light.svg'
+import LogoutIconDark from '../icons/LogoutIcon_dark.svg'
 import handleExportURLs from '../functions/googleDocs'
 
 
-export default function Navbar({ user, handleSignOut, allURLs, toggleTheme }) {
+export default function Navbar({ user, handleSignOut, allURLs, toggleTheme, theme }) {
 
     const userID = user.uid
     const currentUserCollection = collection(usersCollection, `${userID}/urls`)
@@ -38,6 +40,7 @@ export default function Navbar({ user, handleSignOut, allURLs, toggleTheme }) {
                         deleteAllURLs={deleteAllURLs} 
                         handleSignOut={handleSignOut}
                         allURLs={allURLs}
+                        theme={theme}
                     />
                 </NavItem>
             </ul>
@@ -82,7 +85,7 @@ function NavItem(props) {
     )
 }
 
-function DropdownMenu({ handleSignOut, deleteAllURLs, allURLs }) {
+function DropdownMenu({ handleSignOut, deleteAllURLs, allURLs, theme }) {
     // NESTED component O___O
     function DropdownItem(props) {
         // conditionally add red-text to class (for deleteAllURLs)
@@ -100,10 +103,17 @@ function DropdownMenu({ handleSignOut, deleteAllURLs, allURLs }) {
         )
     }
 
+    let ExportIcon = ExportIconLight
+    let LogoutIcon = LogoutIconLight
+    if (theme === "dark") {
+        ExportIcon = ExportIconDark
+        LogoutIcon = LogoutIconDark
+    }
+
     return (
         <div className='dropdown'>
             <DropdownItem onClick={() => handleExportURLs(allURLs)}>
-                <img src={Export} alt="" />
+                <img src={ExportIcon} alt="" />
                 <p>Export All URLs</p>
             </DropdownItem>
             <DropdownItem redText onClick={deleteAllURLs} >

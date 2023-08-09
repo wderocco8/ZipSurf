@@ -179,6 +179,7 @@ export default function URL(props) {
                 handleSignOut={props.handleSignOut}
                 allURLs={allURLs}
                 toggleTheme={props.toggleTheme}
+                theme={props.theme}
             />
             <Header isAuthenticated={true} />
             <div className="form">

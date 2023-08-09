@@ -59,6 +59,7 @@ export default function App() {
                     user={user} 
                     handleSignOut={handleSignOut}
                     toggleTheme={toggleTheme}
+                    theme={theme}
                 /> 
                 : 
                 <div>
