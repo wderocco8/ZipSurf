@@ -1,7 +1,8 @@
 * {
     font-family: 'Karla';
     user-select: none;
-    color: black
+    color: black;
+    transition: var(--theme-transition);
 }
 
 #dark * {
@@ -23,6 +24,8 @@
     --nav-bg-dark: #121212;
     --text-color-dark: #ffffff;
     --blue-color-dark: #7F65FF;
+
+    --theme-transition: 0.3s;
 
 }
 
@@ -58,6 +61,30 @@ ul {
     background-color: var(--nav-bg-dark);
 }
 
+.theme {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.theme:hover {
+    background-color: var(--main-bg-light);
+}
+
+#dark .theme:hover {
+    background-color: var(--main-bg-dark);
+}
+
+.theme img {
+    width:25px;
+    height: 25px;
+}
+
 .navbar-nav {
     max-width: 100%;
     height: 100%;
@@ -89,7 +116,6 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 300ms;
 }
 
 .icon-button:hover {
@@ -122,7 +148,6 @@ ul {
 #dark .dropdown {
     background-color: var(--nav-bg-dark);
     box-shadow: 0 1px 20px rgba(255, 255, 255, 0.1);
-
 }
 
 
@@ -266,6 +291,7 @@ ul {
 
 #dark .form--searchbox {
     box-shadow: 0px 4px 4px 0px rgba(193, 193, 193, 0.35);
+
 }
 
 
@@ -400,7 +426,6 @@ input:-webkit-autofill {
     z-index: 1;
     max-width: 275px;
     left: 40px;
-    transition: 0.5s;
     white-space: nowrap;
     overflow: scroll;
 }
@@ -410,7 +435,7 @@ input:-webkit-autofill {
 }
 
 #dark .delete-url a {
-    color: var(--gray-color)
+    color: var(--gray-color);
 }
 
 .delete-btn {
@@ -424,6 +449,7 @@ input:-webkit-autofill {
     display: inline-block;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
+    /* transition: none; */
 }
 
 
@@ -436,12 +462,13 @@ input:-webkit-autofill {
     background: var(--gray-color);
     box-shadow: 12px -2px 0 var(--main-bg-light),
     6px -2px 0 var(--gray-color);
-    /* transition: 0.5s; */
+    transition: var(--theme-transition);
 }
 
 #dark .delete-btn::before {
     box-shadow: 12px -2px 0 var(--main-bg-dark),
     6px -2px 0 var(--gray-color);
+    transition: var(--theme-transition);
 }
 
 .delete-btn:hover {

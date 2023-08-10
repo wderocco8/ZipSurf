@@ -11,6 +11,8 @@ const API_KEY = import.meta.env.VITE_API_KEY
 const CLIENT_ID = import.meta.env.VITE_CLIENT_ID
 const SCOPES = import.meta.env.VITE_SCOPES
 
+
+
 export default function App() {
     const [isAuthenticated, setIsAuthenticated] = React.useState(false)
     

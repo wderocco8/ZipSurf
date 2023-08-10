@@ -1,6 +1,8 @@
 import React from 'react'
 import { usersCollection } from '../firebase'
 import { collection, getDocs, deleteDoc } from 'firebase/firestore'
+import LightMode from '../icons/ThemeLight.svg'
+import DarkMode from '../icons/ThemeDark.svg'
 import ExportIconLight from '../icons/Export_light.svg'
 import ExportIconDark from '../icons/Export_dark.svg'
 import DeleteSweep from '../icons/DeleteSweep.svg'
@@ -32,7 +34,14 @@ export default function Navbar({ user, handleSignOut, allURLs, toggleTheme, them
     return (
         <nav className='navbar'>
             <ul className='navbar-nav'>
-                <button className='theme' onClick={toggleTheme}>theme</button>
+                <div className='theme' onClick={toggleTheme}>
+                    {theme === "light" 
+                        ?
+                        <img src={DarkMode} alt=''/>
+                        :
+                        <img src={LightMode} alt=''/>
+                    }
+                </div>
                 Hello, {user.displayName}!
                 <NavItem icon={<img src={user.photoURL} alt={user.displayName[0]} className='icon--img' />} >
                     {/* NOTE: dropdown acts as props (later referred to as props.children) */}
