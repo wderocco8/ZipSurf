@@ -74,6 +74,7 @@ ul {
 
 .theme:hover {
     background-color: var(--main-bg-light);
+    transform: scale(1.1);
 }
 
 #dark .theme:hover {
@@ -120,6 +121,7 @@ ul {
 
 .icon-button:hover {
     filter: brightness(1.2);
+    transform: scale(1.1);
 }
 
 /* needed this for some reason (icon-button styles didn't automatically apply) */
@@ -364,6 +366,9 @@ input:-webkit-autofill {
     background-repeat: no-repeat;
     background-position: 12px 11px;
     box-shadow:0 2px 0 #c3c5cf;
+  }
+  #dark .google-btn {
+    color: var(--gray-color);
   }
   .google-btn:hover {
     /* box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25); */

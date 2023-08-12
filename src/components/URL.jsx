@@ -5,7 +5,7 @@ import Header from './Header'
 import { usersCollection } from '../firebase'
 import { addDoc, doc, onSnapshot, collection, deleteDoc } from 'firebase/firestore'
 // Import the environment variables from the `.env` file using Vite's `import.meta.env`
-const API_TOKEN = import.meta.env.VITE_API_TOKEN
+const API_TOKEN = import.meta.env.VITE_TINYURL_API_TOKEN
 
 
 export default function URL(props) {

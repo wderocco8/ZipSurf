@@ -2,12 +2,12 @@ import React from 'react'
 import Header from './components/Header'
 import URL from './components/URL'
 import Login from './components/Login'
-import Navbar from './components/Navbar'
+import NavbarClean from './components/NavbarClean'
 // import { Route, Routes } from "react-router-dom"
 import { auth } from "./firebase"
 import { getRedirectResult } from "firebase/auth"
 import { gapi } from 'gapi-script'
-const API_KEY = import.meta.env.VITE_API_KEY
+const API_KEY = import.meta.env.VITE_GAPI_KEY
 const CLIENT_ID = import.meta.env.VITE_CLIENT_ID
 const SCOPES = import.meta.env.VITE_SCOPES
 
@@ -36,6 +36,7 @@ export default function App() {
         })
     }, [])
 
+    // function to sign out (with firebase authentication)
     const handleSignOut = async () => {
         try {
             await auth.signOut()
@@ -47,10 +48,12 @@ export default function App() {
     // set dark/light mode theme
     const [theme, setTheme] = React.useState("light")
 
+    
+
     const toggleTheme = () => {
         setTheme(currTheme => (currTheme === "light" ? "dark" : "light"))
     }
-    console.log(theme)
+    // console.log(theme)
     document.body.className = theme;
     
     // console.log("user is", user !== null && user.photoURL)
@@ -65,6 +68,10 @@ export default function App() {
                 /> 
                 : 
                 <div>
+                    <NavbarClean
+                        toggleTheme={toggleTheme}
+                        theme={theme}
+                    />
                     <Header isAuthenticated={isAuthenticated} />
                     <Login />
                 </div>
