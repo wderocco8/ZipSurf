@@ -13,6 +13,7 @@ import handleExportURLs from '../functions/googleDocs'
 
 export default function Navbar({ user, handleSignOut, allURLs, toggleTheme, theme }) {
 
+    console.log(theme)
     const userID = user.uid
     const currentUserCollection = collection(usersCollection, `${userID}/urls`)
 

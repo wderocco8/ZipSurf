@@ -3,9 +3,9 @@ import Header from './components/Header'
 import URL from './components/URL'
 import Login from './components/Login'
 import NavbarClean from './components/NavbarClean'
-// import { Route, Routes } from "react-router-dom"
+import { usersCollection } from './firebase'
+import { addDoc, doc, getDocs, updateDoc, onSnapshot, collection } from 'firebase/firestore'
 import { auth } from "./firebase"
-import { getRedirectResult } from "firebase/auth"
 import { gapi } from 'gapi-script'
 const API_KEY = import.meta.env.VITE_GAPI_KEY
 const CLIENT_ID = import.meta.env.VITE_CLIENT_ID
@@ -46,14 +46,66 @@ export default function App() {
     }
 
     // set dark/light mode theme
-    const [theme, setTheme] = React.useState("light")
+    const [theme, setTheme] = React.useState("dark")
+    const [toggled, setToggled] = React.useState(true)
 
-    
+    // maintain `theme` with firebase
+    React.useEffect(() => {
+        // only store theme if firebase authenticated
+        if (isAuthenticated) {
+            // find user and theme collection
+            const userID = user.uid
+            const currentUserCollection = collection(usersCollection, `${userID}/theme`)
+            // run `setTheme` anytime `theme` collection changes
+            const unsubscribe = onSnapshot(
+                currentUserCollection, async function (snapshot) {
+                    // obtain doc (if exists) containing theme
+                    if (!snapshot.empty) {
+                        const themeDoc = snapshot.docs[0].data()
+                        console.log("snapshot:", themeDoc)
+                        setTheme(themeDoc.theme)
+                    } else {
+                        console.log("no data yet")
+                        try {
+                            await addDoc(currentUserCollection, {theme: theme})
+                        } catch (error) {
+                            console.log("Error initializing theme with firestore:", error)
+                        }
+                    }
+                }
+            )
+            return unsubscribe // return clean-up function
+        }
+    }, [isAuthenticated, toggled]) // re-run every time theme changes OR component "mounts" (aka page refresh)
+    console.log(theme)
 
-    const toggleTheme = () => {
-        setTheme(currTheme => (currTheme === "light" ? "dark" : "light"))
+    const toggleTheme = async () => {
+        setToggled(!toggled)
+        // if user is authenticated, save theme to firebase
+        if (isAuthenticated) {
+            try {
+                const userID = user.uid
+                const newTheme = theme === "light" ? "dark" : "light"
+                const currentUserCollection = collection(usersCollection, `${userID}/theme`)
+                // fetch documents in currentUserCollection
+                const querySnapshot = await getDocs(currentUserCollection)
+                // ensure that documents exists
+                if (!querySnapshot.empty) {
+                    const themeDoc = querySnapshot.docs[0]
+                    console.log("theme", themeDoc)
+
+                    // update theme document
+                    updateDoc(themeDoc.ref, {theme: newTheme})
+                }
+
+            } catch (error) {
+                console.log("error saving theme:", error)
+            }
+        // otherwise, simply change theme state (don't save to firebase)
+        } else {
+            setTheme(currTheme => (currTheme === "light" ? "dark" : "light"))
+        }
     }
-    // console.log(theme)
     document.body.className = theme;
     
     // console.log("user is", user !== null && user.photoURL)
