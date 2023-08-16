@@ -27,7 +27,7 @@ export default function URL(props) {
     // sort notes array (to pass into URLCollection component)
     const sortedURLs = allURLs.sort((a, b) => b.createdAt - a.createdAt)
 
-
+    
     // use onSnapshot to update allURLs `state`
     React.useEffect(() => {
         const userID = props.user.uid

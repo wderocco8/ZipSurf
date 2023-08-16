@@ -39,12 +39,15 @@ export default function App() {
     // function to sign out (with firebase authentication)
     const handleSignOut = async () => {
         try {
+            if (gapi.auth2) {
+                await gapi.auth2.getAuthInstance().signOut()
+            }
             await auth.signOut()
+            console.log("Successfully signed out")
         } catch (error) {
-            console.log(error)
+            console.log("Error signing out:", error)
         }
     }
-
     // set dark/light mode theme
     const [theme, setTheme] = React.useState("dark")
     const [toggled, setToggled] = React.useState(true)
@@ -77,7 +80,7 @@ export default function App() {
             return unsubscribe // return clean-up function
         }
     }, [isAuthenticated, toggled]) // re-run every time theme changes OR component "mounts" (aka page refresh)
-    console.log(theme)
+
 
     const toggleTheme = async () => {
         setToggled(!toggled)
