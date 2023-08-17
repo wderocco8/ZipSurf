@@ -50,6 +50,7 @@ export default function App() {
     }
     // set dark/light mode theme
     const [theme, setTheme] = React.useState("dark")
+    // use flag to determine if theme is toggled (avoids infinite recursion in useEffect)
     const [toggled, setToggled] = React.useState(true)
 
     // maintain `theme` with firebase

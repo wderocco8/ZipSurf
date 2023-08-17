@@ -15,13 +15,13 @@
     --border-radius: 8px;
 
     --main-bg-light: #F5F5F5;
-    --nav-bg-light:  #e2ecff;
+    --nav-bg-light:  #e2ecff86;
 
     --gray-color: #757575;
     --blue-color: #2A00FF;
 
     --main-bg-dark: #262626;
-    --nav-bg-dark: #121212;
+    --nav-bg-dark: #1212129a;
     --text-color-dark: #ffffff;
     --blue-color-dark: #7F65FF;
 
@@ -32,11 +32,21 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--main-bg-light);
+    /* background-color: var(--main-bg-light); */
+    background-image: url("../src/icons/light_mode_background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 body.dark {
-    background-color: var(--main-bg-dark);
+    /* background-color: var(--main-bg-dark); */
+    background-image: url("../src/icons/dark_mode_background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 /* styling navbar */
@@ -133,7 +143,7 @@ ul {
 /* styling dropdown menu for navbar items */
 .dropdown {
     position: absolute;
-    top: 58px;
+    top: 62px;
     width: 250px; 
     transform: translateX(-45%);
     background-color: var(--nav-bg-light);
@@ -432,7 +442,7 @@ input:-webkit-autofill {
     max-width: 275px;
     left: 40px;
     white-space: nowrap;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .delete-url a {
