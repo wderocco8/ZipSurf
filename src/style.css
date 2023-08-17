@@ -20,7 +20,7 @@
     --gray-color: #757575;
     --blue-color: #2A00FF;
 
-    --main-bg-dark: #262626;
+    --main-bg-dark: #2d2d46;
     --nav-bg-dark: #1212129a;
     --text-color-dark: #ffffff;
     --blue-color-dark: #7F65FF;
@@ -32,7 +32,7 @@
 body {
     margin: 0;
     padding: 0;
-    /* background-color: var(--main-bg-light); */
+    background-color: var(--main-bg-light);
     background-image: url("../src/icons/light_mode_background.jpg");
     background-size: cover;
     background-position: center;
@@ -41,7 +41,7 @@ body {
 }
 
 body.dark {
-    /* background-color: var(--main-bg-dark); */
+    background-color: var(--main-bg-dark);
     background-image: url("../src/icons/dark_mode_background.jpg");
     background-size: cover;
     background-position: center;
@@ -64,11 +64,12 @@ ul {
     height: var(--nav-size);
     background-color: var(--nav-bg-light);
     padding: 0 1rem;
-    box-shadow: 0 3px 4px rgba(62, 60, 60, 0.579);
+    box-shadow: 0 .1px 5px rgba(62, 60, 60, 0.579);
 }
 
 #dark .navbar {
     background-color: var(--nav-bg-dark);
+    box-shadow: none;
 }
 
 .theme {
@@ -143,7 +144,7 @@ ul {
 /* styling dropdown menu for navbar items */
 .dropdown {
     position: absolute;
-    top: 62px;
+    top: calc(var(--nav-size) + 2px);
     width: 250px; 
     transform: translateX(-45%);
     background-color: var(--nav-bg-light);
