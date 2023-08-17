@@ -33,7 +33,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: var(--main-bg-light);
-    background-image: url("../src/icons/light_mode_background.jpg");
+    background-image: url("../src/images/light_mode_background.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -42,7 +42,7 @@ body {
 
 body.dark {
     background-color: var(--main-bg-dark);
-    background-image: url("../src/icons/dark_mode_background.jpg");
+    background-image: url("../src/images/dark_mode_background.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
