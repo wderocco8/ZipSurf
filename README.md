@@ -7,14 +7,16 @@ This is a project I made over the summer in order to develop some fundamental sk
 
 Firebase Authentication:
 
-TinyURL API:
-
 Firebase Cloud Firestore storage:
 
-Google Docs API:
-
 Styling:
-* 
+
+
+## External APIs Used
+The following external APIs were integrated into this project to enhance its functionality:
+
+### TinyURL API:
+### Google Docs API:
 
 ## How to Run Locally
 1. git clone https://github.com/wderocco8/ZipSurf.git
