@@ -15,8 +15,8 @@ Styling:
 ## External APIs Used
 The following external APIs were integrated into this project to enhance its functionality:
 
-### TinyURL API:
-### Google Docs API:
+#### TinyURL API:
+#### Google Docs API:
 
 ## How to Run Locally
 1. git clone https://github.com/wderocco8/ZipSurf.git
