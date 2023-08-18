@@ -21,7 +21,7 @@ Styling:
 2. cd ZipSurf
 3. create free developer account with [TinyURL](https://tinyurl.com/app/register) (copy api token into .env file)
 4. run the following command
-      ~ npm i && npm run dev
+4.1 npm i && npm run dev
 5. Open the application using the provided link (note: the Google Docs API will only work if "127.0.0.1" is replaced with "localhost" due to constraints on authorized javascript origins)
 
 ## Online Deployment
