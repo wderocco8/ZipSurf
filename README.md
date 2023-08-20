@@ -1,7 +1,7 @@
 # ZipSurf
 
 ## Overview
-This is a project I made over the summer in order to develop some fundamental skills in web development, primarily **React** (Vite-React), **HTML**, **CSS**, **Firebase**, and various **APIs**. 
+This is a summer project I made to establish some fundamental skills in web development, primarily **React** (Vite-React), **HTML**, **CSS**, **Firebase**, and various **APIs**. 
 
 ## Features
 
