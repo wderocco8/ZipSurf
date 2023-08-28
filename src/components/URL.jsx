@@ -72,22 +72,22 @@ export default function URL(props) {
         const userID = props.user.uid
 
         // only try to update collection if found valid tinyUrl
-            try {
-                // update firestore collection
-                const currentUserCollection = collection(usersCollection, `${userID}/urls`)
-                const docRef = await addDoc(currentUserCollection, tempURL)
-    
-                // reset URL to empty string
-                setURL({
-                    longURL: "",
-                    alias: "",
-                    tiny_url: ""
-                })
-                setCharLeft(30)
-                console.log("URL document written with ID: ", docRef.id)
-            } catch (error) {
-                console.log(`Error adding URL doc to user ${userID}`)
-            }
+        try {
+            // update firestore collection
+            const currentUserCollection = collection(usersCollection, `${userID}/urls`)
+            const docRef = await addDoc(currentUserCollection, tempURL)
+
+            // reset URL to empty string
+            setURL({
+                longURL: "",
+                alias: "",
+                tiny_url: ""
+            })
+            setCharLeft(30)
+            console.log("URL document written with ID: ", docRef.id)
+        } catch (error) {
+            console.log(`Error adding URL doc to user ${userID}`)
+        }
         
     }
 
