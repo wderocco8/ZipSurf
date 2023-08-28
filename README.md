@@ -6,16 +6,17 @@ ZipSurf is a summer project I made to establish some fundamental skills in web d
 ## Features
 
 ### Firebase Authentication:
-*
+* Utilized Firebase `getAuth`, `GoogleAuthProvider`, and `signInWithPopup` functions to provide a seamless user authentication and login process
 
 ### Cloud Firestore:
-* 
+* Integrated synchronized storage of shortened URLs using React `state` variables and Firebase `collection` and `addDoc` functions
+* Added error checking for duplicate URLs and invalid URLs to avoid unnecessary reads/writes to the database
 
 ### Export URLs:
 * Implemented Google Docs API to export the user's list of shortened URLs to an OAuth 2.0-verified Google Doc
 
 ### Delete URLs:
-* used Firebase `collection`, `getDocs`, and `deleteDoc` functions to selectively delete *all* or *individual* shortened URLs
+* Used Firebase `collection`, `getDocs`, and `deleteDoc` functions to selectively delete *all* or *individual* shortened URLs
 
 ### UI Polish:
 * 
@@ -24,6 +25,11 @@ ZipSurf is a summer project I made to establish some fundamental skills in web d
 The following external APIs were integrated into this project to enhance its functionality:
 
 #### TinyURL API:
+Version: 2.1
+* Description: We used the Twitter API to fetch real-time tweets based on user search queries.
+* API Provider: Twitter Inc.
+* [API Documentation](https://developer.twitter.com/en/docs/twitter-api)
+
 #### Google Docs API:
 
 ## How to Run Locally
