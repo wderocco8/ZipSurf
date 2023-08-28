@@ -1,10 +1,9 @@
 # [ZipSurf](https://urlshortener-8937b.web.app/)
 
 ## Overview
-ZipSurf is a summer project I made to establish some fundamental skills in web development: **React** (Vite-React), **HTML**, **CSS**, **Firebase**, **TinyURL API**, **Google Docs API***, etc. The application's primary goal is to provide a *simple*, *visually-appealing* interface for users to shorten and save exceedingly long URLs.
+ZipSurf is a summer project I made to establish some fundamental skills in web development: **React** (Vite-React), **HTML**, **CSS**, **Firebase**, **TinyURL API**, **Google Docs API**, **etc**. The application's primary goal is to provide a *simple*, *visually-appealing* interface for users to shorten and save exceedingly long URLs.
 
 ## Features
-
 ### Firebase Authentication:
 * Utilized Firebase `getAuth`, `GoogleAuthProvider`, and `signInWithPopup` functions to provide a seamless user authentication and login process
 
@@ -28,13 +27,13 @@ ZipSurf is a summer project I made to establish some fundamental skills in web d
 ## External APIs Used
 The following external APIs were integrated into this project to enhance its functionality:
 
-#### TinyURL API:
+### TinyURL API:
 Version: v2
 * Description: Used the TinyURL API to fetch custom shortened URLs for registered users
 * API Provider: TinyURL LLC
 * [API Documentation](https://tinyurl.com/app/dev)
 
-#### Google Docs API:
+### Google Docs API:
 Version: v1
 * Description: Used the Google Docs API to export a list of shortened URLs to a newly generated (OAuth 2.0 verified) Google Doc
 * API Provider: Google
