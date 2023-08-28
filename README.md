@@ -5,19 +5,19 @@ ZipSurf is a summer project I made to establish some fundamental skills in web d
 
 ## Features
 
-Firebase Authentication:
+### Firebase Authentication:
 *
 
-Cloud Firestore:
+### Cloud Firestore:
 * 
 
-Export URLs:
+### Export URLs:
 * Implemented Google Docs API to export the user's list of shortened URLs to an OAuth 2.0-verified Google Doc
 
-Delete URLs:
+### Delete URLs:
 * used Firebase `collection`, `getDocs`, and `deleteDoc` functions to selectively delete *all* or *individual* shortened URLs
 
-UI Polish:
+### UI Polish:
 * 
 
 ## External APIs Used
