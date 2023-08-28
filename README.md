@@ -1,4 +1,4 @@
-# [ZipSurf ↗](https://urlshortener-8937b.web.app/)
+# [ZipSurf](https://urlshortener-8937b.web.app/)
 
 ## Overview
 ZipSurf is a summer project I made to establish some fundamental skills in web development: **React** (Vite-React), **HTML**, **CSS**, **Firebase**, **TinyURL API**, **Google Docs API***, etc. The application's primary goal is to provide a *simple*, *visually-appealing* interface for users to shorten and save exceedingly long URLs.
@@ -19,18 +19,26 @@ ZipSurf is a summer project I made to establish some fundamental skills in web d
 * Used Firebase `collection`, `getDocs`, and `deleteDoc` functions to selectively delete *all* or *individual* shortened URLs
 
 ### UI Polish:
-* 
+* Designed the website wireframes and background graphics in **Figma** (the latter implemented *aurora* and *glass morphism* effects)
+* Used **Figma** and **Realtime Colors** to generate light/dark mode themes, which is persistent across page refreshes due to the `state` variable saved in each user's database
+* Included a variety of SVG icons to enhance the user experience
+* Developed custom Navbar component to allow for sleek and effective user navigation
+* Personally designed website **favicon**
 
 ## External APIs Used
 The following external APIs were integrated into this project to enhance its functionality:
 
 #### TinyURL API:
-Version: 2.1
-* Description: We used the Twitter API to fetch real-time tweets based on user search queries.
-* API Provider: Twitter Inc.
-* [API Documentation](https://developer.twitter.com/en/docs/twitter-api)
+Version: v2
+* Description: Used the TinyURL API to fetch custom shortened URLs for registered users
+* API Provider: TinyURL LLC
+* [API Documentation](https://tinyurl.com/app/dev)
 
 #### Google Docs API:
+Version: v1
+* Description: Used the Google Docs API to export a list of shortened URLs to a newly generated (OAuth 2.0 verified) Google Doc
+* API Provider: Google
+* [API Documentation](https://developers.google.com/docs/api/reference/rest)
 
 ## How to Run Locally
 1. git clone https://github.com/wderocco8/ZipSurf.git
