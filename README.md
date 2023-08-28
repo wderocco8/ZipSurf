@@ -1,16 +1,24 @@
-# ZipSurf
+# [ZipSurf](https://urlshortener-8937b.web.app/)
 
 ## Overview
-ZipSurf is a summer project I made to establish some fundamental skills in web development, primarily **React** (Vite-React), **HTML**, **CSS**, **Firebase**, and various **APIs**. 
+ZipSurf is a summer project I made to establish some fundamental skills in web development: **React** (Vite-React), **HTML**, **CSS**, **Firebase**, **TinyURL API**, **Google Docs API***, etc. The application's primary goal is to provide a *simple*, *visually-appealing* interface for users to shorten and save exceedingly long URLs.
 
 ## Features
 
 Firebase Authentication:
+*
 
-Firebase Cloud Firestore storage:
+Cloud Firestore:
+* 
 
-Styling:
+Export URLs:
+* Implemented Google Docs API to export the user's list of shortened URLs to an OAuth 2.0-verified Google Doc
 
+Delete URLs:
+* used Firebase `collection`, `getDocs`, and `deleteDoc` functions to selectively delete *all* or *individual* shortened URLs
+
+UI Polish:
+* 
 
 ## External APIs Used
 The following external APIs were integrated into this project to enhance its functionality:
@@ -27,7 +35,7 @@ The following external APIs were integrated into this project to enhance its fun
 6. Open the application using the provided link (note: the Google Docs API will only work if "127.0.0.1" is replaced with "localhost" due to constraints on authorized javascript origins)
 
 ## Online Deployment
-For this project, I used Firebase Hosting to deploy my site,  To try deploying it yourself, you can simply use the folder that you downloaded above and follow these steps:
+For this project, I used Firebase Hosting to deploy my site,  To try deploying it yourself, you can use the folder that you downloaded above and follow these steps:
 
 1. open root of project directory (cd ZipSurf)
 2. run the following commands
