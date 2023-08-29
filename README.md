@@ -1,7 +1,7 @@
 # [ZipSurf](https://urlshortener-8937b.web.app/)
 
 ## Overview
-ZipSurf is a summer project I made to establish some fundamental skills in web development: **React** (Vite-React), **HTML**, **CSS**, **Firebase**, and various **external API** implementations. The application's primary goal is to provide a *simple*, *visually-appealing* interface for users to shorten and save exceedingly long URLs.
+ZipSurf is a summer project I made to establish some fundamental skills in web development: **React** (Vite-React), **HTML**, **CSS**, **Firebase**, and **external API** implementations. The application's primary goal is to provide a *simple*, *visually-appealing* interface for users to shorten and save exceedingly long URLs.
 
 ## Features
 ### Firebase Authentication:
