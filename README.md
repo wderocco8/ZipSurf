@@ -66,5 +66,6 @@ Alternatively, you can visit the site I already created below:
 
 
 ## App Visualization
-
+Coming soon 👀
+(for now, feel free to interact with the site itself: [ZipSurf](https://urlshortener-8937b.web.app/)https://urlshortener-8937b.web.app/)
 
