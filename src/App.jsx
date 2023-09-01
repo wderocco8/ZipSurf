@@ -117,8 +117,8 @@ export default function App() {
     // IMPORTANT: allows use to reference "body.dark" in style.css file
     document.body.className = theme;
     
-    // console.log("user is", user !== null && user.photoURL)
     return (
+        // IMPORTANT: `id={theme}` allows use to reference theme for `*` in style.css
         <main id={theme}>
             {isAuthenticated ? 
                 <URL 

@@ -1,23 +1,23 @@
 
 import React from 'react'
-import { useState } from 'react'
 import { auth } from '../firebase'
 import { GoogleAuthProvider, signInWithPopup} from "firebase/auth"
 
 export default function Login() {
     
-    
+    // function to signInWithGoogle (using Firebase authentication)
     const signInWithGoogle = () => {
+		// initialize provider
+		const provider = new GoogleAuthProvider()
 
-        const provider = new GoogleAuthProvider()
-
-        signInWithPopup(auth, provider)
-          .then((result) => {
-            console.log(result)
-          })
-          .catch((error) => {
-            console.log(error);
-          })
+		// use Firebase sign in function
+		signInWithPopup(auth, provider)
+			.then((result) => {
+				console.log(result)
+			})
+			.catch((error) => {
+				console.log(error);
+			})
       }
     
     return (
