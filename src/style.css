@@ -148,6 +148,7 @@ ul {
     width: 250px; 
     transform: translateX(-45%);
     background-color: var(--nav-bg-light);
+    backdrop-filter: blur(8px);
     filter: brightness(1.02);
     border-radius: var(--border-radius);
     padding: 1rem; 
@@ -160,6 +161,7 @@ ul {
 
 #dark .dropdown {
     background-color: var(--nav-bg-dark);
+    backdrop-filter: blur(8px);
     box-shadow: 0 1px 20px rgba(255, 255, 255, 0.1);
 }
 
@@ -189,7 +191,7 @@ ul {
 } */
 
 .menu-item:hover {
-    background-color:rgb(191, 212, 252);
+    background-color:rgba(150, 167, 255, 0.202);
 }
 
 #dark .menu-item:hover {
@@ -237,8 +239,6 @@ ul {
     width: 375px;
     text-align: center;
     font-size: 24px;
-    /* font-style: italic; */
-    /* margin-bottom: 60px; */
 }
 
 
